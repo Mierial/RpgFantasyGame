@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Script/Character/ClassReader.cs.meta
+guid: 6a3d354c661bfbe41aa01770ee5e06fc
+========
+guid: 82e9f00af20c5d049a6f2da2467707ab
+>>>>>>>> main:Assets/Script/Character/ClassCharacte.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

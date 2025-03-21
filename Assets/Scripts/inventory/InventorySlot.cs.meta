@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scripts/inventory/InventorySlot.cs.meta
+guid: ca308f23b6bd67e4ca4eae549df6e7bd
+========
+guid: 0a988284ed7509448823658a41d69647
+>>>>>>>> 3d6a45a (equipment):Assets/Scripts/inventory/EquipmentManager.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
