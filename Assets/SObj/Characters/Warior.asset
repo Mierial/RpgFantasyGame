@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e9f00af20c5d049a6f2da2467707ab, type: 3}
   m_Name: Warior
   m_EditorClassIdentifier: 
-  strenght: 10
-  intelect: 5
+  strength: 5
+  intellect: 6
   agility: 5
-  health: 200
-  buffsternght: 1.5
-  buffinelect: 1.2
-  buffagility: 1
+  health: 0
+  armor: 0
+  buffStrength: 0
+  buffIntellect: 0
+  buffAgility: 0
