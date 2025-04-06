@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class SwordAttack : MonoBehaviour
 {
+    public SwordParticle swordParticle;
     [SerializeField] private GameObject sword;
     private Collider swordCollider;
     InventoryManager inventoryManager;
     public WeaponSettings swordInfo;
+
 
     private void Start()
     {
@@ -25,7 +27,7 @@ public class SwordAttack : MonoBehaviour
     {
         if (swordCollider != null)
         {
-            swordCollider.isTrigger = true;
+            swordCollider.isTrigger = true;          
         }
     }
     public void EndAttack()

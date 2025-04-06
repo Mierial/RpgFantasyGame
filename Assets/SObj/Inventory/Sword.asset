@@ -18,3 +18,4 @@ MonoBehaviour:
   prefab: {fileID: 8355526836073403257, guid: b3da2ce305c5d9045a2dbe876dc5a3da, type: 3}
   ItemValue: 70
   armorCount: 0
+  healCount: 0
