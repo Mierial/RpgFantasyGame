@@ -8,7 +8,6 @@ public class EnemyDropLoot : MonoBehaviour
 
     public void DropLoot()
     {
-        Debug.Log("DropItem111");
         GameObject dropItem = LootTable.GetDroppedItem();
         if(dropItem != null)
         {

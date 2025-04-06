@@ -10,7 +10,7 @@ public class EnemyCharacter : MonoBehaviour
     private int defense;
     private int maxHealth;
     EnemyDropLoot dropLoot;
-
+    public ParticleSystem deathparticle;
    
 
     public Animator animator; 
@@ -29,6 +29,7 @@ public class EnemyCharacter : MonoBehaviour
 
     public void ClaimDamage(int damage)
     {
+        deathparticle.Play();
         int actualDamage = Mathf.Max(damage - defense, 0);
         health -= actualDamage;
         if (health <=0)
@@ -42,11 +43,7 @@ public class EnemyCharacter : MonoBehaviour
         if (animator != null)
         {
             animator.SetTrigger("Die");
+            dropLoot.DropLoot();
         }
-    }
-
-    public void Died()
-    {
-        dropLoot.DropLoot();
     }
 }

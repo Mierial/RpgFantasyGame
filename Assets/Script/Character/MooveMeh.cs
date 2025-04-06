@@ -6,6 +6,7 @@ using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class MooveMeh : MonoBehaviour
 {
+    [SerializeField] private AudioPlayer audioPlayer;
     private const string Horizontal = "Horizontal";
     private const string Vertical = "Vertical";
     private const string Jump = "Jump";
@@ -60,6 +61,10 @@ public class MooveMeh : MonoBehaviour
 
     private void moovePlayer()
     {
+        if (Mathf.Abs(_vertical) > 0.1f && IsGround)
+        {
+            audioPlayer.PlayStepSound();
+        }
 
         _currentrotationY += _horizontal * rotationSpeed;
         transform.rotation = Quaternion.Euler(0, _currentrotationY, 0);
@@ -90,7 +95,7 @@ public class MooveMeh : MonoBehaviour
     {
         _animator.SetTrigger("Dead");
     }
-    private bool isSwordInHand()
+    public bool isSwordInHand()
     {
         return InventoryManager.Instance.heldItem != null && InventoryManager.Instance.heldItem.name == "Sword";
     }

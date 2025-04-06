@@ -32,7 +32,6 @@ public class Patroling : MonoBehaviour
             StartCoroutine(WaitBeforeNextMove());
         }
 
-        // Обновление анимации патрулирования
         animator.SetBool("isPatrolling", isPatrolling && agent.velocity.magnitude > 0.1f);
     }
 
@@ -59,7 +58,7 @@ public class Patroling : MonoBehaviour
         if (!isPatrolling)
         {
             isPatrolling = true;
-            MoveToNextPoint();  // Начать с первой точки
+            MoveToNextPoint();
         }
     }
 
@@ -73,5 +72,10 @@ public class Patroling : MonoBehaviour
     public bool IsPatrolling()
     {
         return isPatrolling;
+    }
+
+    public void SetZeroSpeed()
+    {
+        agent.isStopped = true;
     }
 }

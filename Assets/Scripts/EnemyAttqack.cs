@@ -13,7 +13,7 @@ public class EnemyAttack : MonoBehaviour
             return;
         }
 
-        attackCollider.enabled = true;
+        attackCollider.enabled = false;
         attackCollider.isTrigger = true; 
     }
 

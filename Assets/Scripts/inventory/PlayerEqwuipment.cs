@@ -10,10 +10,9 @@ public class PlayerEqwuipment : MonoBehaviour
     {
         if (currentItem != null)
         {
-            Destroy(currentItem); // Видаляємо старий предмет з руки
+            Destroy(currentItem); 
         }
 
-        // Створюємо новий предмет і прикріплюємо до руки
         currentItem = Instantiate(itemPrefab, handPosition.position, handPosition.rotation);
         currentItem.transform.SetParent(handPosition);
     }
@@ -24,7 +23,7 @@ public class PlayerEqwuipment : MonoBehaviour
         if (currentItem != null)
         {
             currentItem.transform.SetParent(null);
-            currentItem.AddComponent<Rigidbody>(); // Додаємо фізику для падіння
+            currentItem.AddComponent<Rigidbody>(); 
             currentItem = null;
         }
     }

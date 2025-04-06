@@ -1,25 +1,27 @@
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;  
+using System.Collections.Generic;
 
 public class BothItem : MonoBehaviour
 {
-    [SerializeField] private List<Item> items = new List<Item>(); 
+    [SerializeField] private List<Item> items = new List<Item>();
     public Text buyText;
     public Image image;
     private int _buyPrice;
     public GameObject panel;
     public InventoryManager inventoryManager;
 
+    public CharacterHealth characterHealth;
+
     private int curenntItem = 0;
     public Image[] images;
 
     private int currentArmor = 0;
 
-    public ArmorBar bar;
-
     public Sell sellManager;
     private int _currentNumberSlot = 0;
+
+    public Wallett wallett;
 
     private void Start()
     {
@@ -38,7 +40,7 @@ public class BothItem : MonoBehaviour
 
     public void SwicthItem()
     {
-        if (_currentNumberSlot == items.Count) 
+        if (_currentNumberSlot == items.Count)
         {
             _currentNumberSlot = 0;
         }
@@ -72,7 +74,7 @@ public class BothItem : MonoBehaviour
 
     public void BuyItem()
     {
-        if (sellManager.totalValue >= _buyPrice)
+        if (wallett.TotalCoins >= _buyPrice)
         {
 
             if (items[_currentNumberSlot].armorCount == 0)
@@ -85,11 +87,10 @@ public class BothItem : MonoBehaviour
                 images[curenntItem].sprite = items[_currentNumberSlot].icon;
                 curenntItem++;
                 currentArmor += items[_currentNumberSlot].armorCount;
-                bar.SetHealth(currentArmor);
+                characterHealth.AddArmor(items[_currentNumberSlot].armorCount);
             }
 
-
-            sellManager.totalValue -= _buyPrice;
+            wallett.SubtractCoins(_buyPrice);
             sellManager.UpdateText();
 
             RemoveItemFromList(_currentNumberSlot);
@@ -103,7 +104,7 @@ public class BothItem : MonoBehaviour
     {
         if (items.Count > 0 && index < items.Count)
         {
-            items.RemoveAt(index);  
+            items.RemoveAt(index);
         }
     }
 

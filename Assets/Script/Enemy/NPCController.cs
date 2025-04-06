@@ -1,40 +1,41 @@
 using UnityEngine;
+using UnityEngine.AI;
 using System.Collections;
 
-// ”правление NPC
 public class NPCController : MonoBehaviour
 {
     public float moveSpeed = 2f;
     public Transform[] waypoints;
     private int currentWaypointIndex = 0;
     private Animator animator;
+    private NavMeshAgent navMeshAgent;
 
     void Start()
     {
+        navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        navMeshAgent.speed = moveSpeed;
         StartCoroutine(Patrol());
     }
 
     IEnumerator Patrol()
     {
-        while (true)
+        while (waypoints.Length > 0)
         {
-            if (waypoints.Length > 0)
+            Transform target = waypoints[currentWaypointIndex];
+            navMeshAgent.SetDestination(target.position);
+            animator.SetBool("isWalking", true);
+
+            while (navMeshAgent.pathPending || navMeshAgent.remainingDistance > 0.1f)
             {
-                Transform target = waypoints[currentWaypointIndex];
-                while (Vector3.Distance(transform.position, target.position) > 0.1f)
-                {
-                    Vector3 direction = (target.position - transform.position).normalized;
-                    transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
-                    transform.forward = direction; 
-                    animator.SetBool("isWalking", true);
-                    yield return null;
-                }
-                animator.SetBool("isWalking", false);
-                yield return new WaitForSeconds(2f);
-                currentWaypointIndex = (currentWaypointIndex + 1) % waypoints.Length;
+                yield return null;
             }
-            yield return null;
+
+            animator.SetBool("isWalking", false);
+
+            yield return new WaitForSeconds(10);
+
+            currentWaypointIndex = (currentWaypointIndex + 1) % waypoints.Length;
         }
     }
 }

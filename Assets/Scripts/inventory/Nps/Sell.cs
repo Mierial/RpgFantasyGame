@@ -3,13 +3,13 @@ using UnityEngine.UI;
 
 public class Sell : MonoBehaviour
 {
+    public Wallett wallett;
     [SerializeField] private Text infoText;
     [SerializeField] private InventoryManager inventoryManager;
     public Text valueText;
     private Item item_pref;
 
     public Image itemImage;
-    public int totalValue = 0;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -49,7 +49,7 @@ public class Sell : MonoBehaviour
 
         if (InventoryManager.Instance.heldItem != null)
         {
-            totalValue += item_pref.ItemValue;
+            wallett.AddCoins(item_pref.ItemValue);
             inventoryManager.SellItem(item_pref);
             inventoryManager.heldItem = null;
         }
@@ -61,6 +61,16 @@ public class Sell : MonoBehaviour
 
     public void UpdateText()
     {
-        valueText.text = totalValue.ToString();
+        valueText.text = wallett.TotalCoins.ToString();
+    }
+
+    public void AddCoin()
+    {
+
+    }
+
+    public void DeclineCoins()
+    {
+
     }
 }

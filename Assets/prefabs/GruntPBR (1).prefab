@@ -413,7 +413,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemiInfo: {fileID: 11400000, guid: 5ecc79400e296074e84fec5436628536, type: 2}
-  health: 200
   animator: {fileID: 2933439647678333138}
 --- !u!195 &6438875594447495909
 NavMeshAgent:

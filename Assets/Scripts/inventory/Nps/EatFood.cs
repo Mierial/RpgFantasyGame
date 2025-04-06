@@ -1,40 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EatFood : MonoBehaviour
 {
-    private int _foodCountHealth;
-    private Item _food;
-    public HealthBar _healthBar;
+    public CharacterHealth characterHealth; 
     public void EatingFood()
     {
-        if (InventoryManager.Instance.heldObject != null)
+        if (InventoryManager.Instance.heldObject == null) return;
+
+        Item _food = InventoryManager.Instance.heldItem;
+
+        if (_food == null || _food.healCount <= 0 || characterHealth == null) return;
+
+        if (characterHealth.Heal(_food.healCount))
         {
+            InventorySlot slotToClear = InventoryManager.Instance.FindSlotWithItem(_food);
 
+            InventoryManager.Instance.SellItem(_food);
 
-            _food = InventoryManager.Instance.heldItem;
-            if (_food != null && _food.healCount > 0 && _healthBar.slider.value!=100)
+            if (slotToClear != null)
             {
-                _healthBar.slider.value += _food.healCount;
-
-                InventorySlot slotToClear = InventoryManager.Instance.FindSlotWithItem(_food);
-
-                InventoryManager.Instance.SellItem(_food);
-
-                if (slotToClear != null)
-                {
-                    slotToClear.ClearSlot();
-                }
-
-                Destroy(InventoryManager.Instance.heldObject);
-                InventoryManager.Instance.heldItem = null;
-
-                InventoryManager.Instance.onItemChangedCallback?.Invoke();
+                slotToClear.ClearSlot();
             }
-        }
-        }
 
+            Destroy(InventoryManager.Instance.heldObject);
+            InventoryManager.Instance.heldItem = null;
 
+            InventoryManager.Instance.onItemChangedCallback?.Invoke();
+        }
 
     }
+}
