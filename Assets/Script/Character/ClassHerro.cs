@@ -1,39 +1,40 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class ClassHerro : Character
 {
-    
     [SerializeField] private CharacterSettings ClassCharact;
+
     public float strenght;
     public float intelect;
     public float agility;
 
-    public float buffsternght;
-    public float buffinelect;
-    public float buffagility;
-
-
     private void Awake()
     {
+        if (ClassCharact == null)
+        {
+            Debug.LogError("ClassCharact ?? ???? ?????????? ? ??????????!");
+            return;
+        }
+
         strenght = ClassCharact.Strength;
         intelect = ClassCharact.Intellect;
         agility = ClassCharact.agility;
-        health = ClassCharact.health;
-        buffsternght = ClassCharact.buffStrength;
-        buffinelect = ClassCharact.buffIntellect;
-        buffagility = ClassCharact.buffAgility;
-        UpdateHaracteristic();
+
+        ModifyHealth();
     }
 
-    private void UpdateHaracteristic()
+    public void UpdateHaract(int Lvl)
     {
-        defense = (int)((agility / 3 + strenght / 5) * 1.5f) + 2;
-        damage = (int)(agility / 2 + strenght / 2 + intelect / 3) + 15;
+        strenght = ClassCharact.Strength * Lvl;
+        intelect = ClassCharact.Intellect * Lvl;
+        agility = ClassCharact.agility * Lvl;
+
+        ModifyHealth();
     }
 
-
+    public void ModifyHealth()
+    {
+        health = Mathf.RoundToInt((strenght + agility + intelect) * 10);
+    }
 }
-
-

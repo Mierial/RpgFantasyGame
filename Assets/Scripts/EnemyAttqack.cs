@@ -40,7 +40,7 @@ public class EnemyAttack : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
-            CharacterHealth playerHealth = other.GetComponent<CharacterHealth>();
+            CharacterHealth1 playerHealth = other.GetComponent<CharacterHealth1>();
 
             if (playerHealth != null)
             {

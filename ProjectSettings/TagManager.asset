@@ -9,6 +9,7 @@ TagManager:
   - atakedpoint
   - Ground
   - Enemy
+  - exp
   layers:
   - Default
   - TransparentFX
