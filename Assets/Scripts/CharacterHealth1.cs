@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CharacterHealth : MonoBehaviour
+public class CharacterHealth1 : MonoBehaviour
 {
     public CharacterSettings character;
     public HealthBar healthBar;
