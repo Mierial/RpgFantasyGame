@@ -6,13 +6,15 @@ public class CharacterHealth1 : MonoBehaviour
     public HealthBar healthBar;
     public ArmorBar armorBar;
     [SerializeField]public Character charact;
-    public int maxHealth = 1000;
+    public int maxHealth = 100;
     public int currentHealth;
     private int currentArmor = 0;
 
+    public Animator animator;
+
     private void Start()
     {
-        currentHealth = charact.Health;
+        currentHealth = 100;
         healthBar.SetHealth(currentHealth);
         armorBar.SetHealth(currentArmor);
     }
@@ -20,7 +22,7 @@ public class CharacterHealth1 : MonoBehaviour
     public void TakeDamage(int damage)
     {
         if (damage <= 0) return;
-
+        
         int remainingDamage = damage;
 
         if (currentArmor > 0)
@@ -37,6 +39,8 @@ public class CharacterHealth1 : MonoBehaviour
             currentHealth = Mathf.Max(currentHealth, 0);
             healthBar.SetHealth(currentHealth);
         }
+        if (currentHealth<=0)
+            animator.SetTrigger("Dead");
     }
 
     public void Heal(int healAmount)
@@ -51,6 +55,4 @@ public class CharacterHealth1 : MonoBehaviour
         currentArmor += armorAmount;
         armorBar.slider.value = currentArmor;
     }
-
-
 }

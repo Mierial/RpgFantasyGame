@@ -36,6 +36,10 @@ public class EnemyCharacter : MonoBehaviour
         {
             Die();
         }
+        else
+        {
+            animator.SetTrigger("Hit");
+        }
     }
 
     private void Die()

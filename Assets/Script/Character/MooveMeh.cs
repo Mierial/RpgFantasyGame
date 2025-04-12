@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEngine;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
+﻿using UnityEngine;
 
-public class MooveMeh : MonoBehaviour
+public class MooveMehanic : MonoBehaviour
 {
     [SerializeField] private AudioPlayer audioPlayer;
     private const string Horizontal = "Horizontal";
@@ -25,6 +21,7 @@ public class MooveMeh : MonoBehaviour
     private float _vertical;
     private Vector3 _direction;
     private bool IsGround;
+    private float _animSpeed;
 
     private void Awake()
     {
@@ -36,7 +33,7 @@ public class MooveMeh : MonoBehaviour
     }
     private void FixedUpdate()
     {
-         
+
         _horizontal = Input.GetAxis(Horizontal);
         _vertical = Input.GetAxis(Vertical);
 
@@ -45,7 +42,7 @@ public class MooveMeh : MonoBehaviour
         GetAnim();
         GetJump();
         AttackPos();
-        _animator.SetBool("isEqquiped", isSwordInHand());
+        _animator.SetBool("isEqquiped", IsSwordInHand());
 
     }
     public void GetJump()
@@ -78,15 +75,16 @@ public class MooveMeh : MonoBehaviour
     }
     private void GetAnim()
     {
-        _animator.SetFloat("Speed", Mathf.Abs(_vertical));
+        _animator.SetFloat("Speed", _vertical);
     }
+
     private void OnCollisionEnter(Collision collision)
     {
         IsGround = true;
     }
-    private void AttackPos() 
+    private void AttackPos()
     {
-        bool isAttacking = Input.GetButton("Fire1") && !inventoryUI.InventoryUi.activeSelf && !sellItem.panel.activeSelf;
+        bool isAttacking = Input.GetButton("Fire1") && !inventoryUI.InventoryUi.activeSelf && !sellItem.panel.activeSelf && InventoryManager.Instance.heldItem.name == "Sword";
         _animator.SetBool("Attack", isAttacking);
 
     }
@@ -95,9 +93,8 @@ public class MooveMeh : MonoBehaviour
     {
         _animator.SetTrigger("Dead");
     }
-    public bool isSwordInHand()
+    public bool IsSwordInHand()
     {
         return InventoryManager.Instance.heldItem != null && InventoryManager.Instance.heldItem.name == "Sword";
     }
-
 }

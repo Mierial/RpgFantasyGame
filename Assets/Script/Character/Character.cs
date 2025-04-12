@@ -25,7 +25,6 @@ public abstract class Character : MonoBehaviour
         get { return health; }
         set
         {
-            Debug.Log($"Health setter called! Old value: {health}, New value: {value}");
             if (value < 0) { health = 0; }
             else if (value > maxHealth) { health = maxHealth; }
             else { health = value; }

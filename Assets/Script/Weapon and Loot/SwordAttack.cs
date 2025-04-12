@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,37 +5,7 @@ public class SwordAttack : MonoBehaviour
 {
     public SwordParticle swordParticle;
     [SerializeField] private GameObject sword;
-    private Collider swordCollider;
-    InventoryManager inventoryManager;
     public WeaponSettings swordInfo;
-
-
-    private void Start()
-    {
-        if (sword != null)
-        {
-            swordCollider = sword.GetComponent<Collider>();
-        }
-        else
-        {
-        
-        }
-    }
-
-    public void StartAttack()
-    {
-        if (swordCollider != null)
-        {
-            swordCollider.isTrigger = true;          
-        }
-    }
-    public void EndAttack()
-    {
-        if (swordCollider != null)
-        {
-            swordCollider.isTrigger = false;
-        }
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -48,7 +17,5 @@ public class SwordAttack : MonoBehaviour
                 enemy.ClaimDamage(swordInfo.Damage);
             }
         }
-        
-        
     }
 }

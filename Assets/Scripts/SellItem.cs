@@ -11,7 +11,7 @@ public class BothItem : MonoBehaviour
     public GameObject panel;
     public InventoryManager inventoryManager;
 
-    public CharacterHealth characterHealth;
+    public CharacterHealth1 characterHealth;
 
     private int curenntItem = 0;
     public Image[] images;

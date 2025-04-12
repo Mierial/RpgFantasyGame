@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenuUI.unity
     guid: 015b028ec8929aa4bbadafbbf3c70def
   - enabled: 1
-    path: Assets/Scenes/EPIC_Fantasy_Town_BG_Scene_Day.unity
-    guid: ac35f97a91909924096fc58014364a5d
+    path: Assets/Scenes/ArtemScene.unity
+    guid: 65fecdb39e994a94694850b7552d721e
   m_configObjects: {}

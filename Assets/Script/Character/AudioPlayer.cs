@@ -9,7 +9,7 @@ public class AudioPlayer : MonoBehaviour
     [SerializeField] private AudioClip swordSound;
     [SerializeField] private float stepDelay = 1f; 
     private float stepTimer = 1f;
-    public MooveMeh mooveMeh;
+    public MooveMehanic mooveMeh;
 
     private void Update()
     {
@@ -26,7 +26,7 @@ public class AudioPlayer : MonoBehaviour
     }
     public void swordPlaySource()
     {
-        if(mooveMeh.isSwordInHand())
+        if(mooveMeh.IsSwordInHand())
         {
             swordAudioSource.PlayOneShot(swordSound);
         }

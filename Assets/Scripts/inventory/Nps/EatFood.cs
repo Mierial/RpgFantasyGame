@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EatFood : MonoBehaviour
 {
-    public CharacterHealth characterHealth; 
+    public CharacterHealth1 characterHealth; 
     public void EatingFood()
     {
         if (InventoryManager.Instance.heldObject == null) return;
@@ -11,10 +11,10 @@ public class EatFood : MonoBehaviour
 
         if (_food == null || _food.healCount <= 0 || characterHealth == null) return;
 
-        if (characterHealth.Heal(_food.healCount))
+        else if(characterHealth.currentHealth < 100) 
         {
             InventorySlot slotToClear = InventoryManager.Instance.FindSlotWithItem(_food);
-
+            characterHealth.Heal(_food.healCount);
             InventoryManager.Instance.SellItem(_food);
 
             if (slotToClear != null)

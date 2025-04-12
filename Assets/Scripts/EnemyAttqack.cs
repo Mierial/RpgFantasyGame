@@ -37,7 +37,6 @@ public class EnemyAttack : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-
         if (other.CompareTag("Player"))
         {
             CharacterHealth1 playerHealth = other.GetComponent<CharacterHealth1>();
@@ -45,6 +44,7 @@ public class EnemyAttack : MonoBehaviour
             if (playerHealth != null)
             {
                 playerHealth.TakeDamage(golemData.damage);
+                Debug.Log("attack");
 
             }
         }

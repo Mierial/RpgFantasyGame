@@ -3,7 +3,12 @@ guid: 24fc2c3e62c52bf4e9e63fd980b8e85d
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Player_Model_PlayerMaterial_AlbedoTransparency
+    second: {fileID: 2800000, guid: aa1ad8a4c68614f4fa99d4d06b28a075, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
