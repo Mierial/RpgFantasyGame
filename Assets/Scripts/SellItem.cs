@@ -22,6 +22,8 @@ public class BothItem : MonoBehaviour
     private int _currentNumberSlot = 0;
 
     public Wallett wallett;
+    public AudioSource audioSource;
+
 
     private void Start()
     {
@@ -79,6 +81,7 @@ public class BothItem : MonoBehaviour
 
             if (items[_currentNumberSlot].armorCount == 0)
             {
+                audioSource.Play();
                 InventoryManager.Instance.Add(items[_currentNumberSlot]);
             }
             else
