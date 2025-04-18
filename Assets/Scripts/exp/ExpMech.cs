@@ -1,34 +1,41 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ExpMech : MonoBehaviour
 {
     [SerializeField] private GameObject player;
     private ClassHerro charactik;
+    public CharacterHealth1 Health1;
     private StatProgress progress;
+    public HealthBar healthBar;
 
-    public double needexp = 5;
-    public double curtered_exp;
+    public float needexp = 5;
+    public float curtered_exp;
     public int Lvl = 1;
 
     public void Awake()
     {
-        charactik = player.GetComponent<ClassHerro>(); // ????????????? charactik
-        LvlUp();
+        charactik = player.GetComponent<ClassHerro>();
         progress = FindObjectOfType<StatProgress>();
+        if (progress != null)
+        {
+            progress.SetFromExp(this);
+        }
     }
 
     public void LvlUp()
     {
-        if (curtered_exp >= needexp)
+        while (curtered_exp >= needexp)
         {
-            curtered_exp -= needexp; 
+            curtered_exp -= needexp;
             Lvl++;
-            needexp += 5; 
+            needexp += 5;
             charactik.UpdateHaract(Lvl);
-            progress.AddPoints(Convert.ToInt32(curtered_exp));
+        }
+
+        if (progress != null)
+        {
+            progress.SetFromExp(this);
         }
     }
 
@@ -37,11 +44,10 @@ public class ExpMech : MonoBehaviour
         if (other.CompareTag("exp"))
         {
             curtered_exp += 5;
-            Destroy(other.gameObject); 
-        }
+            Destroy(other.gameObject);
+            Health1.maxHealth += 20;
+            healthBar.maxHealth += 20;
 
-        if (curtered_exp >= needexp)
-        {
             LvlUp();
         }
     }

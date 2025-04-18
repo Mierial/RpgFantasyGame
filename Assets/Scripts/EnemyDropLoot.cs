@@ -9,9 +9,9 @@ public class EnemyDropLoot : MonoBehaviour
     public void DropLoot()
     {
         GameObject dropItem = LootTable.GetDroppedItem();
-        if(dropItem != null)
+        if (dropItem != null)
         {
-            Instantiate(dropItem, transform.position, Quaternion.identity);
+            Instantiate(dropItem, transform.position + Vector3.up, Quaternion.identity);
         }
     }
 }

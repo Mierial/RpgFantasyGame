@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Rendering;
 
 public class MooveMehanic : MonoBehaviour
 {
@@ -21,7 +22,9 @@ public class MooveMehanic : MonoBehaviour
     private float _vertical;
     private Vector3 _direction;
     private bool IsGround;
-    private float _animSpeed;
+
+    private bool canAttack = true;
+    public Collider Swordcollider;
 
     private void Awake()
     {
@@ -29,22 +32,20 @@ public class MooveMehanic : MonoBehaviour
         _animator = GetComponent<Animator>();
         _animator.SetBool("IsGround", IsGround);
         IsGround = true;
-
     }
+
     private void FixedUpdate()
     {
-
         _horizontal = Input.GetAxis(Horizontal);
         _vertical = Input.GetAxis(Vertical);
-
 
         moovePlayer();
         GetAnim();
         GetJump();
         AttackPos();
         _animator.SetBool("isEqquiped", IsSwordInHand());
-
     }
+
     public void GetJump()
     {
         if (Input.GetButtonDown("Jump") && IsGround)
@@ -54,7 +55,6 @@ public class MooveMehanic : MonoBehaviour
             IsGround = false;
         }
     }
-
 
     private void moovePlayer()
     {
@@ -69,10 +69,8 @@ public class MooveMehanic : MonoBehaviour
         _direction = transform.forward * _vertical * _speed;
         _direction.y = m_rb.velocity.y;
         m_rb.velocity = _direction;
-
-
-
     }
+
     private void GetAnim()
     {
         _animator.SetFloat("Speed", _vertical);
@@ -82,19 +80,35 @@ public class MooveMehanic : MonoBehaviour
     {
         IsGround = true;
     }
+
     private void AttackPos()
     {
-        bool isAttacking = Input.GetButton("Fire1") && !inventoryUI.InventoryUi.activeSelf && !sellItem.panel.activeSelf && InventoryManager.Instance.heldItem.name == "Sword";
-        _animator.SetBool("Attack", isAttacking);
+        bool isUIClosed = !inventoryUI.InventoryUi.activeSelf && !sellItem.panel.activeSelf;
+        bool isSwordEquipped = InventoryManager.Instance.heldItem != null && InventoryManager.Instance.heldItem.name == "Sword";
 
+        if (Input.GetButtonDown("Fire1"))
+        {
+            _animator.SetTrigger("Attack");
+        }
     }
+
 
     public void Dead()
     {
         _animator.SetTrigger("Dead");
     }
+
     public bool IsSwordInHand()
     {
         return InventoryManager.Instance.heldItem != null && InventoryManager.Instance.heldItem.name == "Sword";
+    }
+
+    public void EnableCollider()
+    {
+        Swordcollider.enabled = true;
+    }
+    public void DisableCollider()
+    {
+        Swordcollider.enabled = false;
     }
 }
