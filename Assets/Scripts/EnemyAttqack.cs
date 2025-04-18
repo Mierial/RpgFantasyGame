@@ -44,7 +44,6 @@ public class EnemyAttack : MonoBehaviour
             if (playerHealth != null)
             {
                 playerHealth.TakeDamage(golemData.damage);
-                Debug.Log("attack");
 
             }
         }

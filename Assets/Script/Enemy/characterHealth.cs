@@ -7,15 +7,19 @@ public class CharacterHealth : MonoBehaviour
 
     [SerializeField] private int maxHealth = 100;
     [SerializeField] private int currentHealth;
-    private int currentArmor = 0;
     [SerializeField] private int maxArmor = 0;
+    private int currentArmor = 0;
+
+    public int CurrentHealth => currentHealth;
+    public int CurrentArmor => currentArmor;
+    public int MaxHealth => maxHealth;
+    public int MaxArmor => maxArmor;
 
     private void Start()
     {
         currentHealth = maxHealth;
         currentArmor = 0;
-        healthBar.SetHealth(currentHealth);
-        armorBar.SetHealth(currentArmor);
+        UpdateBars();
     }
 
     public void TakeDamage(int damage)
@@ -29,15 +33,15 @@ public class CharacterHealth : MonoBehaviour
             int absorbed = Mathf.Min(currentArmor, damage);
             currentArmor -= absorbed;
             remainingDamage -= absorbed;
-            armorBar.SetHealth(currentArmor);
         }
 
         if (remainingDamage > 0)
         {
             currentHealth -= remainingDamage;
             currentHealth = Mathf.Max(currentHealth, 0);
-            healthBar.SetHealth(currentHealth);
         }
+
+        UpdateBars();
     }
 
     public bool Heal(int healAmount)
@@ -47,30 +51,39 @@ public class CharacterHealth : MonoBehaviour
         if (currentHealth < maxHealth)
         {
             currentHealth = Mathf.Min(currentHealth + healAmount, maxHealth);
-            healthBar.SetHealth(currentHealth);
+            UpdateBars();
             return true;
         }
         return false;
     }
+
     public void RepairArmor(int armorAmount)
     {
-        currentArmor += armorAmount;
-        if (currentArmor >= maxArmor)
-            currentArmor = maxArmor;
-        armorBar.slider.value = currentArmor;
+        if (armorAmount <= 0) return;
+        currentArmor = Mathf.Min(currentArmor + armorAmount, maxArmor);
+        UpdateBars();
     }
 
     public void AddHealth(int value)
     {
-        currentHealth += value;
-        healthBar.slider.value = currentHealth;
+        if (value <= 0) return;
+        currentHealth = Mathf.Min(currentHealth + value, maxHealth);
+        UpdateBars();
     }
 
     public void AddArmor(int value)
     {
-        currentArmor += value;
-        armorBar.slider.value = currentArmor;
+        if (value <= 0) return;
+        currentArmor = Mathf.Min(currentArmor + value, maxArmor);
+        UpdateBars();
     }
 
+    private void UpdateBars()
+    {
+        if (healthBar != null)
+            healthBar.SetHealth(currentHealth);
 
+        if (armorBar != null)
+            armorBar.SetHealth(currentArmor);
+    }
 }

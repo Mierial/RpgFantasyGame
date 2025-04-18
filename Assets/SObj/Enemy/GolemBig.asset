@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: GolemBig
   m_EditorClassIdentifier: 
   health: 200
-  damage: 50
+  damage: 20
   defence: 0
   maxHealth: 0

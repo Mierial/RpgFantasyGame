@@ -12,6 +12,8 @@ public class InventoryManager : MonoBehaviour
             return;
         }
         Instance = this;
+
+        mooveMehanic = FindObjectOfType<MooveMehanic>();
     }
 
     public delegate void OnItemChanged();
@@ -24,6 +26,7 @@ public class InventoryManager : MonoBehaviour
     public Transform handTransform;
 
     public GameObject heldObject;
+    private MooveMehanic mooveMehanic;
 
     public bool Add(Item item)
     {
@@ -64,6 +67,16 @@ public class InventoryManager : MonoBehaviour
         if (item.prefab != null && handTransform != null)
         {
             heldObject = Instantiate(item.prefab, handTransform.position, handTransform.rotation, handTransform);
+
+            if (heldItem.name == "Sword")
+            {
+                Collider swordCol = heldObject.GetComponentInChildren<Collider>();
+                if (swordCol != null && mooveMehanic != null)
+                {
+                    mooveMehanic.Swordcollider = swordCol;
+                    swordCol.enabled = false; 
+                }
+            }
 
             ItemPickUp itemPickUp = heldObject.GetComponent<ItemPickUp>();
             if (itemPickUp != null)
@@ -122,6 +135,7 @@ public class InventoryManager : MonoBehaviour
             }
         }
     }
+
     public void SellItem(Item item)
     {
         items.Remove(item);
@@ -144,5 +158,4 @@ public class InventoryManager : MonoBehaviour
         }
         return null;
     }
-   
 }
