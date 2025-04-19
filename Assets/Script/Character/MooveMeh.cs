@@ -86,9 +86,9 @@ public class MooveMehanic : MonoBehaviour
         bool isUIClosed = !inventoryUI.InventoryUi.activeSelf && !sellItem.panel.activeSelf;
         bool isSwordEquipped = InventoryManager.Instance.heldItem != null && InventoryManager.Instance.heldItem.name == "Sword";
 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && IsSwordInHand()&& !inventoryUI.InventoryUi.activeSelf)
         {
-            _animator.SetTrigger("Attack");
+            _animator.SetBool("Attack", true);
         }
     }
 
@@ -110,5 +110,9 @@ public class MooveMehanic : MonoBehaviour
     public void DisableCollider()
     {
         Swordcollider.enabled = false;
+    }
+    public void BoolEnd()
+    {
+        _animator.SetBool("Attack", false);
     }
 }

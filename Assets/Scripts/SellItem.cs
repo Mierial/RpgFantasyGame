@@ -94,7 +94,7 @@ public class BothItem : MonoBehaviour
             }
 
             wallett.SubtractCoins(_buyPrice);
-            sellManager.UpdateText();
+            wallett.UpdateText();
 
             RemoveItemFromList(_currentNumberSlot);
 

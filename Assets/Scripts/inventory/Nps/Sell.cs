@@ -56,21 +56,7 @@ public class Sell : MonoBehaviour
 
         inventoryManager.onItemChangedCallback?.Invoke();
         UpdateItemInfo();
-        UpdateText();
+        wallett.UpdateText();
     }
 
-    public void UpdateText()
-    {
-        valueText.text = wallett.TotalCoins.ToString();
-    }
-
-    public void AddCoin()
-    {
-
-    }
-
-    public void DeclineCoins()
-    {
-
-    }
 }
