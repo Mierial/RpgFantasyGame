@@ -2,10 +2,15 @@ using UnityEngine;
 
 public class CharacterHealth1 : MonoBehaviour
 {
+    [SerializeField] private Character charact;
     public CharacterSettings character;
     public HealthBar healthBar;
     public ArmorBar armorBar;
-    [SerializeField]public Character charact;
+    public DeathRevial deathRevial;
+
+    public ScreenFade screenFade;
+
+
     public int maxHealth = 100;
     public int currentHealth;
     private int currentArmor = 0;
@@ -39,8 +44,13 @@ public class CharacterHealth1 : MonoBehaviour
             currentHealth = Mathf.Max(currentHealth, 0);
             healthBar.SetHealth(currentHealth);
         }
-        if (currentHealth<=0)
+        if (currentHealth <= 0)
+        {
+            screenFade.StartFade();
             animator.SetTrigger("Dead");
+            deathRevial.PanelDeath.SetActive(true);
+        }
+
     }
 
     public void Heal(int healAmount)

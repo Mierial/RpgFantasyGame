@@ -13,6 +13,9 @@ public class ExpMech : MonoBehaviour
     public float curtered_exp;
     public int Lvl = 1;
 
+    public ParticleSystem particleSystem;
+    public GameObject image;
+
     public void Awake()
     {
         charactik = player.GetComponent<ClassHerro>();
@@ -31,6 +34,8 @@ public class ExpMech : MonoBehaviour
             Lvl++;
             needexp += 5;
             charactik.UpdateHaract(Lvl);
+            image.SetActive(true);
+            particleSystem.Play();
         }
 
         if (progress != null)

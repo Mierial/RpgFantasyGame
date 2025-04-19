@@ -5,13 +5,15 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
-    public Transform _target;
-    private NavMeshAgent _agent;
     [SerializeField] private float _lookRadius = 10f;
     [SerializeField] private float _chaseSpeed = 2.6f;
     [SerializeField] private float _patrolSpeed = 1.5f;
+
+    public Transform _target;
+    private NavMeshAgent _agent;
     private Patroling _patrolingScript;
     private Animator _animator;
+
     private float timeSinceLastSeen = 6f;
     private float _chaseMemoryDuration = 3f;
 

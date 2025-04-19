@@ -4,7 +4,6 @@ public class CharacterHealth : MonoBehaviour
 {
     public HealthBar healthBar;
     public ArmorBar armorBar;
-
     [SerializeField] private int maxHealth = 100;
     [SerializeField] private int currentHealth;
     [SerializeField] private int maxArmor = 0;
