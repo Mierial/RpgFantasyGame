@@ -30,13 +30,17 @@ public class ScreenFade : MonoBehaviour
                 color.a = 1f;
                 fadeImage.color = color;
                 isFading = false;
-                fadeImage.gameObject.SetActive(false);
-            }
+            }               
         }
     }
 
     public void StartFade()
     {
         isFading = true;
+    }
+
+    public void DeactivateImage()
+    {
+        fadeImage.gameObject.SetActive(isFading);
     }
 }
