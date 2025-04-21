@@ -23,7 +23,7 @@ public class MooveMehanic : MonoBehaviour
     private Vector3 _direction;
     private bool IsGround;
 
-    private bool canAttack = true;
+    private bool isAttacking = false;
     public Collider Swordcollider;
 
     private void Awake()
@@ -39,10 +39,10 @@ public class MooveMehanic : MonoBehaviour
         _horizontal = Input.GetAxis(Horizontal);
         _vertical = Input.GetAxis(Vertical);
 
+        AttackPos();
         moovePlayer();
         GetAnim();
         GetJump();
-        AttackPos();
         _animator.SetBool("isEqquiped", IsSwordInHand());
     }
 
@@ -84,12 +84,16 @@ public class MooveMehanic : MonoBehaviour
     private void AttackPos()
     {
         bool isUIClosed = !inventoryUI.InventoryUi.activeSelf && !sellItem.panel.activeSelf;
-        bool isSwordEquipped = InventoryManager.Instance.heldItem != null && InventoryManager.Instance.heldItem.name == "Sword";
 
-        if (Input.GetButtonDown("Fire1") && IsSwordInHand()&& !inventoryUI.InventoryUi.activeSelf)
+        if (Input.GetButtonDown("Fire1")&& IsSwordInHand() && isUIClosed && !isAttacking)
         {
-            _animator.SetBool("Attack", true);
+            _animator.SetTrigger("Attack");
         }
+    }
+
+    private void ResetAttack()
+    {
+        _animator.ResetTrigger("Attack");
     }
 
 
